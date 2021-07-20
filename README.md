@@ -36,9 +36,9 @@ Secure Should be False if Your are using local lavalink. If Your node is using s
 To run the Bot just type `npm start`
 
 ## ABOUT & INFO
-Creation Date: Tuesday, 20 July 2021
-Published Date: Tuesday, 20 July 2021
-❱・[Support Server](https://discord.gg/dB6RzCbZhW)
+Creation Date: Tuesday, 20 July 2021.        
+Published Date: Tuesday, 20 July 2021.                                                                                 
+❱・[Support Server](https://discord.gg/dB6RzCbZhW).                                                 
 ❱・Discord Id [ARESᴵᴺᴱ ᴮᴱ#1773](https://discord.com/users/688028837711446041)
 
 Want to contribute just submit a PR.
