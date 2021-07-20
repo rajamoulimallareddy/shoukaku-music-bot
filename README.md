@@ -1,5 +1,5 @@
 # Shoukaku-Music-Bot
-A music bot which is feature rich and best quality Music with no Lag.
+A music bot which is feature rich and best quality Music.
 
 ## Requirements
 > For Stable Lavalink refer to [Stable Lavalink](https://github.com/freyacodes/Lavalink/releases)
