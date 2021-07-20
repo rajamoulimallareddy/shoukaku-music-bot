@@ -41,5 +41,5 @@ Published Date: Tuesday, 20 July 2021.
 ❱・[Support Server](https://discord.gg/dB6RzCbZhW).                                                 
 ❱・Discord Id [ARESᴵᴺᴱ ᴮᴱ#1773](https://discord.com/users/688028837711446041)
 
-Want to contribute just submit a PR.
+Want to contribute just submit a PR.                                 nn.
                                                      Made With Hate by 🖤 ARESᴵᴺᴱ ᴮᴱ#1773
