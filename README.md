@@ -42,4 +42,4 @@ Published Date: Tuesday, 20 July 2021.
 ❱・Discord Id [ARESᴵᴺᴱ ᴮᴱ#1773](https://discord.com/users/688028837711446041)
 
 Want to contribute just submit a PR.
-Made With Hate by 🖤 ARESᴵᴺᴱ ᴮᴱ#1773
+                                                     Made With Hate by 🖤 ARESᴵᴺᴱ ᴮᴱ#1773
