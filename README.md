@@ -1,14 +1,14 @@
 # Shoukaku-Music-Bot
 A music bot which is feature rich and best quality Music with no Lag.
 
-# Requirements
+## Requirements
 > For Stable Lavalink refer to [Stable Lavalink](https://github.com/freyacodes/Lavalink/releases)
 > For stable/master Branch Lavalink sever refer [application.yml](https://github.com/freyacodes/Lavalink/blob/master/LavalinkServer/application.yml.example)
 
 > For Dev branch Lavalink refer to [Dev Branch Lavalink](https://ci.fredboat.com/viewType.html?buildTypeId=Lavalink_Build&branch_Lavalink=refs%2Fheads%2Fdev&tab=buildTypeStatusDiv) 
 > For Dev branch Lavalink sever refer [application.yml](https://github.com/freyacodes/Lavalink/blob/dev/LavalinkServer/application.yml.example)
 
-# Config & Bot Startup
+## Config & Bot Startup
 Go to config/config.json.example rename it file's name into config.json.
 ```json
 {
@@ -35,7 +35,7 @@ Go to config/config.json.example rename it file's name into config.json.
 Secure Should be False if Your are using local lavalink. If Your node is using ssl keep it to true.
 To run the Bot tyoe `npm start`
 
-# ABOUT & INFO
+## ABOUT & INFO
 Creation Date: Tuesday, 20 July 2021
 Published Date: Tuesday, 20 July 2021
 ❱・[Support Server](https://discord.gg/dB6RzCbZhW)
