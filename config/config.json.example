@@ -1,0 +1,20 @@
+{
+    "prefix": "",
+    "token": "",
+    "owners": [
+        ""
+    ],
+    "colors": {
+        "default": "606C65",
+        "error": "FF4500"
+    },
+    "nodes": [
+        {
+            "name": "Node-01",
+            "host": "localhost",
+            "port": 2333,
+            "auth": "youshallnotpass",
+            "secure": false
+        }
+    ]
+}
