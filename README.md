@@ -38,7 +38,7 @@ To run the Bot tyoe `npm start`
 # ABOUT & INFO
 Creation Date: Tuesday, 20 July 2021
 Published Date: Tuesday, 20 July 2021
-❱・[Support Server](https://discord.gg/dB6RzCbZhW)
+❱・[Support Server](https://discord.gg/dB6RzCbZhW)\n
 ❱・Discord Id [ARESᴵᴺᴱ ᴮᴱ#1773](https://discord.com/users/688028837711446041)
 
 Want to contribute just submit a PR.
