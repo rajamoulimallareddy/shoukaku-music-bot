@@ -3,10 +3,10 @@ A music bot which is feature rich and best quality Music.
 
 ## Requirements
 > For Stable Lavalink refer to [Stable Lavalink](https://github.com/freyacodes/Lavalink/releases)
-> For stable/master Branch Lavalink sever refer [application.yml](https://github.com/freyacodes/Lavalink/blob/master/LavalinkServer/application.yml.example)
+> For stable/master Branch Lavalink server refer [application.yml](https://github.com/freyacodes/Lavalink/blob/master/LavalinkServer/application.yml.example)
 
 > For Dev branch Lavalink refer to [Dev Branch Lavalink](https://ci.fredboat.com/viewType.html?buildTypeId=Lavalink_Build&branch_Lavalink=refs%2Fheads%2Fdev&tab=buildTypeStatusDiv) 
-> For Dev branch Lavalink sever refer [application.yml](https://github.com/freyacodes/Lavalink/blob/dev/LavalinkServer/application.yml.example)
+> For Dev branch Lavalink server refer [application.yml](https://github.com/freyacodes/Lavalink/blob/dev/LavalinkServer/application.yml.example)
 
 ## Config & Bot Startup
 Go to config/config.json.example rename it file's name into config.json.
