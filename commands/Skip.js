@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 module.exports = {
-    name: 'pause',
+    name: 'skip',
     description: 'Pauses the Player.',
     aliases: ['skipto', 'Jump', 'next', 's'],
     guildOnly: false,
