@@ -39,7 +39,7 @@ To run the Bot just type `npm start`
 Creation Date: Tuesday, 20 July 2021.        
 Published Date: Tuesday, 20 July 2021.                                                                                 
 ❱・[Support Server](https://discord.gg/dB6RzCbZhW).                                                 
-❱・Discord Id [ARESᴵᴺᴱ ᴮᴱ#1773](https://discord.com/users/688028837711446041)
+❱・Discord Id [ARESᴮᴱ ᴿ⁴ᴬ#1773](https://discord.com/users/688028837711446041)
 
 Want to contribute just submit a PR.                                                                                   
-Made With Hate by 🖤 ARESᴵᴺᴱ ᴮᴱ#1773
+Made With Hate by 🖤 ARESᴮᴱ ᴿ⁴ᴬ#1773
