@@ -15,7 +15,7 @@ Go to config/config.json.example rename it file's name into config.json.
     "prefix": "Your_Prefix",
     "token": "Your Token",
     "owners": [
-        "Your Discord Id for eval"
+        "Your Discord Id for eval & owner only Commands"
     ],
     "colors": {
         "default": "606C65",
