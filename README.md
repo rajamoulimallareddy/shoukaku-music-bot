@@ -32,8 +32,7 @@ Go to config/config.json.example rename it file's name into config.json.
     ]
 }
 ```
-Secure Should be False if Your are using local lavalink. If Your node is using ssl keep it to true.
-To run the Bot just type `npm start`
+Secure Should be False if Your are using local lavalink. If Your node is using ssl keep it to true.                                                                              To run the Bot just type `npm start`
 
 ## ABOUT & INFO
 Creation Date: Tuesday, 20 July 2021.        
