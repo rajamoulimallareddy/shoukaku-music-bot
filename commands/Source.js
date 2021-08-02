@@ -3,11 +3,9 @@
 /* eslint-disable linebreak-style */
 module.exports = {
     name: 'source',
-    description: '',
-    aliases: [''],
+    description: 'Gives invite of the bot support/github link',
     guildOnly: false,
     args: false,
-    usage: '',
     execute: async (message, args, client) => {
         message.channel.send(client.util.embed().setDescription('❱・[Source Code](https://github.com/rajamoulimallareddy/shoukaku-music-bot)\n❱・[Support Server](https://discord.gg/dB6RzCbZhW)'));
     }
