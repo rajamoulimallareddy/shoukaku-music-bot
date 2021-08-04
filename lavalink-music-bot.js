@@ -1,8 +1,12 @@
 /* eslint-disable linebreak-style */
 const fs = require('fs');
 const Discord = require('discord.js');
-const client = new Discord.Client();
-const MusicQueue = require('./Structuers/MusicQueue.js'), MusicHandler = require('./Structuers/MusicHandler.js');
+const client = new Discord.Client({
+    allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
+    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'],
+    restTimeOffset: 0
+});
+const MusicQueue = require('./Structuers/MusicQueue.js'), MusicHandler = require('./Structuers/MusicHandler.js'), loggerHandler = require('./handler/Shoukakulogger.js');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -10,6 +14,7 @@ client.config = require('./config/config.json');
 client.queue = new MusicQueue(client);
 client.shoukaku = new MusicHandler(client);
 client.util = require('./config/utility.js');
+client.logger = new loggerHandler();
 
 fs.readdir('./events/', (err, files) => {
     const eventHandler = require('./handler/eventHandler.js');

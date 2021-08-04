@@ -25,7 +25,7 @@ module.exports = {
                         )}\`\nYou can use \`${client.config.prefix}help {command name}\` to get info about a specific command!`,
                 )
                 .setColor(embedColor);
-            return message.channel.send(cmdHelpEmbed);
+            return message.reply({ embeds: [cmdHelpEmbed], allowedMentions: { repliedUser: false } });
         }
 
         const name = args[0].toLowerCase();
@@ -34,7 +34,7 @@ module.exports = {
             commands.find((cmd) => cmd.aliases && cmd.aliases.includes(name));
 
         if (!command) {
-            return message.reply('This command does not exist!');
+            return message.reply({ contents: ['This command does not exist!'], allowedMentions: { repliedUser: false } });
         }
         const cmdHelpEmbed = client.util.embed()
             .setTitle(`${command.name} | Command info`)
@@ -54,7 +54,7 @@ module.exports = {
             );
         }
 
-        return message.channel.send(cmdHelpEmbed);
+        return message.reply({ embeds: [cmdHelpEmbed], allowedMentions: { repliedUser: false } });
 
     },
 };

@@ -15,23 +15,19 @@ class MusicDispatcher {
             const embed = util.embed()
                 .setTitle('Now Playing:')
                 .setDescription(`[${this.current.info.title}](${this.current.info.uri})(${util.millisToDuration(this.current.info.length)}) - ${this.current.info.requester}`);
-            this.text.send(embed);
-        });
-
-        this.player.on('end', () => {
+            this.text.send({ embeds: [embed], allowedMentions: { repliedUser: false } });
+        }).on('end', () => {
             this.previous = this.current;
             this.current = null;
-            this.play()
-                .catch(() => {
-                    this.queue.length = 0;
-                    this.destroy();
-                });
+            this.play();
+        }).on('trackException', e => {
+            if (!this.player) return;
+            this.text.send({ embeds: [util.embed().setAuthor(' | Something went wrong with playing the Track', this.client.user.displayAvatarURL(), 'https://discord.gg/dB6RzCbZhW').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})`)], allowedMentions: { repliedUser: false } });
+            this.client.logger.debug('TrackException', e);
         });
-
-        for (const playerEvent of ['closed', 'error', 'nodeDisconnect']) {
-            this.player.on(playerEvent, data => {
-                if (data instanceof Error || data instanceof Object)
-                    console.log(data);
+        for (const event of ['closed', 'error']) {
+            this.player.on(event, data => {
+                if (data instanceof Error || data instanceof Object) this.client.logger.error(data);
                 this.queue.length = 0;
                 this.destroy();
             });
@@ -45,7 +41,8 @@ class MusicDispatcher {
     async play() {
         if (!this.exists || !this.queue.length) return this.destroy();
         this.current = this.queue.shift();
-        await this.player.playTrack(this.current.track);
+        this.player.setVolume(0.25);
+        this.player.playTrack(this.current.track);
     }
 
     async pause() {
@@ -73,11 +70,12 @@ class MusicDispatcher {
         await this.player.stopTrack();
     }
 
-    destroy() {
+    destroy(reason) {
+        if (reason) this.client.logger.debug(this.constructor.name, reason);
         this.queue.length = 0;
-        this.player.disconnect();
+        this.player.connection.disconnect();
         this.client.queue.delete(this.guild.id);
-        this.text.send(util.embed().setDescription('Queue Is Empty').setColor('GREEN')).catch(() => null);
+        this.text.send({ embeds: [util.embed().setDescription('Queue Is Empty').setColor('GREEN')], allowedMentions: { repliedUser: false } }).catch(() => null);
     }
 }
 

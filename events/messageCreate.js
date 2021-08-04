@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 module.exports = {
-    event: 'message',
+    event: 'messageCreate',
     run: (message, client) => {
         if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
         const args = message.content.slice(client.config.prefix.length).split(/ +/);
@@ -24,7 +24,7 @@ module.exports = {
             if (command.usage) {
                 reply += `\nThe proper usage would be: \`${client.config.prefix}${command.name} ${command.usage}\``;
             }
-            return message.channel.send(reply);
+            return message.reply(reply);
         }
         try {
             command.execute(message, args, client);

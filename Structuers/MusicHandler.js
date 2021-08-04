@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
-const { Shoukaku } = require('shoukaku');
+const { Shoukaku, Libraries } = require('shoukaku');
+const chalk = require('chalk');
 const config = require('../config/config.json');
 const LavalinkServers = config.nodes;
 const shoukakuOptions = {
@@ -12,12 +13,27 @@ const shoukakuOptions = {
 
 class MusicHandler extends Shoukaku {
     constructor(client) {
-        super(client, LavalinkServers, shoukakuOptions);
+        super(new Libraries.DiscordJS(client), LavalinkServers, shoukakuOptions);
 
-        this.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
-        this.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
-        this.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
-        this.on('disconnected', (name, reason) => console.warn(`Lavalink ${name}: Disconnected, Reason ${reason || 'No reason'}`));
+        this.on('ready', (name, resumed) =>
+            client.logger.log(chalk.green(`LAVALINK => [STATUS] ${name} successfully connected.`, `This connection is ${resumed ? 'resumed' : 'a new connection'}`))
+        );
+
+        this.on('error', (name, error) =>
+            client.logger.error(chalk.red(`LAVALINK => ${name}: Error Caught.`, error))
+        );
+
+        this.on('close', (name, code, reason) =>
+            client.logger.log(chalk.redBright(`LAVALINK => ${name}: Closed, Code ${code}`, `Reason ${reason || 'No reason'}.`))
+        );
+
+        this.on('disconnect', (name, players, moved) =>
+            client.logger.log(chalk.yellowBright(`LAVALINK => ${name}: Disconnected`, moved ? 'players have been moved' : 'players have been disconnected'))
+        );
+
+        this.on('debug', (name, reason) =>
+            client.logger.log(chalk.yellowBright`LAVALINK => ${name}`, reason || 'No reason')
+        );
     }
 }
 

@@ -6,6 +6,6 @@ module.exports = {
     event: 'ready',
     once: true,
     run(client) {
-        console.log(chalk.green(`${client.user.tag} is now ready.`));
+        console.log(chalk.green(`[CLIENT]   => [READY]               [${client.user.tag}]`));
     },
 };

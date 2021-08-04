@@ -1,6 +1,6 @@
 {
     "prefix": "-",
-    "token": "ODMyNTk5NjUwMjEyMzgwNzAy.YHmI2Q.L_aCqtkI-wfcvwdv54TPBg3x6jg",
+    "token": "ODMyNTk5NjUwMjEyMzgwNzAy.YHmI2Q.76tDPMV8cJoCGab-eWbRrfLrnzw",
     "owners": [
         "688028837711446041",
         "857958962904694836"
@@ -12,8 +12,7 @@
     "nodes": [
         {
             "name": "Node-01",
-            "host": "localhost",
-            "port": 2333,
+            "url": "localhost:2333",
             "auth": "youshallnotpass",
             "secure": false
         }

@@ -21,17 +21,13 @@ module.exports = {
             if (output.includes(client.config.token)) {
                 output = output.replace(client.config.token, 'T0K3N');
             }
-            message.channel.send(output, {
-                code: 'js'
-            });
+            message.reply(`\`\`\`js\n${output}\`\`\``);
         }).catch((err) => {
             err = err.toString();
             if (err.includes(client.config.token)) {
                 err = err.replace(client.config.token, 'T0K3N');
             }
-            message.channel.send(err, {
-                code: 'js'
-            }); 
+            message.reply(`\`\`\`js\n${err}\`\`\``);
         });
     },
 };
