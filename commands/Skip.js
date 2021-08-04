@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 module.exports = {
     name: 'skip',
-    description: 'Pauses the Player.',
+    description: 'skips a track or skips to specific track in queue.',
     aliases: ['skipto', 'Jump', 'next', 's'],
     guildOnly: false,
     args: false,
