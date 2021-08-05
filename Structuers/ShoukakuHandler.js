@@ -11,7 +11,7 @@ const shoukakuOptions = {
     restTimeout: 10000
 };
 
-class MusicHandler extends Shoukaku {
+class ShoukakuHandler extends Shoukaku {
     constructor(client) {
         super(new Libraries.DiscordJS(client), LavalinkServers, shoukakuOptions);
 
@@ -37,4 +37,4 @@ class MusicHandler extends Shoukaku {
     }
 }
 
-module.exports = MusicHandler;
+module.exports = ShoukakuHandler;
