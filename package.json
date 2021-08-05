@@ -1,6 +1,6 @@
 {
   "name": "shoukaku-music-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A Music bot which Uses Lavalink as its Audio Player",
   "main": "lavalink-music-bot.js",
   "dependencies": {
