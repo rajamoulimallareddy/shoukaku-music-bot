@@ -8,6 +8,6 @@ module.exports = {
     guildOnly: false,
     args: false,
     execute: async (message, args, client) => {
-        message.reply({ embeds: [client.util.embed().setDescription('❱・[Source Code](https://github.com/rajamoulimallareddy/shoukaku-music-bot)\n❱・[Support Server](https://discord.gg/dB6RzCbZhW)')], allowedMentions: { repliedUser: false } });
+        message.reply({ embeds: [client.util.embed().setDescription('❱・ [Source Code](https://github.com/rajamoulimallareddy/shoukaku-music-bot)\n❱・[Support Server](https://discord.gg/dB6RzCbZhW)')], allowedMentions: { repliedUser: false } });
     }
 };
