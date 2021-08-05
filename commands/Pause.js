@@ -6,7 +6,7 @@ module.exports = {
     guildOnly: false,
     args: false,
     usage: '',
-    execute: async (message, client) => {
+    execute: async (message, args, client) => {
         if (!message.member.voice.channelId)
             return await message.reply({ embeds: [client.util.embed().setDescription('You are not in a voice channel to perform this.').setColor('RED')], allowedMentions: { repliedUser: false } });
         const MusicDispatcher = client.queue.get(message.guild.id);
