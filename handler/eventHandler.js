@@ -17,6 +17,7 @@ module.exports = (err, files, client) => {
                 eventFunction.run(...args, client),
             );
         }
+
         catch (error) {
             console.error(error.stack);
         }
