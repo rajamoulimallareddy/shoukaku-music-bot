@@ -11,11 +11,13 @@ class MusicQueue extends Map {
         const existing = this.get(message.guild.id);
 
         if (!existing) {
-            const player = await node.joinVoiceChannel({
+            const player = await node.joinChannel({
                 guildID: message.guild.id,
-                voiceChannelID: message.member.voice.channelID,
+                shardID: message.guild.shard.id,
+                channelID: message.member.voice.channelId,
                 deaf: true
             });
+            this.client.logger.debug(player.constructor.name, `New connection @ guild "${message.guild.id}"`);
 
             if (message.guild.me.voice.serverMute === false) {
                 message.guild.me.voice.setDeaf(true);
@@ -30,10 +32,12 @@ class MusicQueue extends Map {
 
             dispatcher.queue.push(track);
             this.set(message.guild.id, dispatcher);
+            this.client.logger.debug(dispatcher.constructor.name, `New player dispatcher @ guild "${message.guild.id}"`);
             return dispatcher;
 
         }
         existing.queue.push(track);
+        if (!existing.current) existing.play();
         return null;
     }
 }

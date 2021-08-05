@@ -10,7 +10,7 @@ module.exports = {
     usage: '',
     ownerOnly: true,
     execute: async (message, args, client) => {
-        const msg = await message.channel.send('Pinging...');
+        const msg = await message.reply({ content: 'Pinging...', allowedMentions: { repliedUser: false } });
         let clientStats = stripIndent`
            Gateway Ping : ${Math.round(message.client.ws.ping)}ms
            REST Ping    : ${msg.createdTimestamp - message.createdTimestamp}ms
@@ -23,6 +23,6 @@ module.exports = {
                 message.author.displayAvatarURL({ dynamic: true })
             )
             .setDescription(`\`\`\`nim\n${clientStats}\`\`\``);
-        msg.edit('', embed);
+        msg.edit({ content: ' ', embeds: [embed], allowedMentions: { repliedUser: false } });
     }
 };
