@@ -12,7 +12,6 @@ const shoukakuOptions = {
 };
 
 class ShoukakuHandler extends Shoukaku {
-
     constructor(client) {
         super(new Libraries.DiscordJS(client), LavalinkServers, shoukakuOptions);
 
