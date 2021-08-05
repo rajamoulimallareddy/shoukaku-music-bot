@@ -4,6 +4,7 @@
 module.exports = {
     name: 'source',
     description: 'Gives invite of the bot support/github link',
+    aliases: [],
     guildOnly: false,
     args: false,
     execute: async (message, args, client) => {

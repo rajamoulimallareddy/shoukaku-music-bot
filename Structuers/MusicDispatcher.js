@@ -14,9 +14,9 @@ class MusicDispatcher {
         this.player.on('start', () => {
             const embed = util.embed()
                 .setTitle('Now Playing:')
-                .setDescription(`[${this.current.info.title}](${this.current.info.uri})(${util.millisToDuration(this.current.info.length)}) - ${this.current.info.requester}`);
+                .setDescription(`${this.current.info.isStream ? '[StreamingLive]\n' : ''}[${this.current.info.title}](${this.current.info.uri}) (${util.millisToDuration(this.current.info.length)}) - ${this.current.info.requester}`);
             this.text.send({ embeds: [embed], allowedMentions: { repliedUser: false } });
-        }).player.on('end', () => {
+        }).on('end', () => {
             this.previous = this.current;
             this.current = null;
             this.play();
@@ -41,6 +41,7 @@ class MusicDispatcher {
 
     async play() {
         if (!this.exists || !this.queue.length) return this.destroy();
+        this.current = this.queue.shift();
         this.player.setVolume(0.25);
         this.player.playTrack(this.current.track);
     }
@@ -74,7 +75,7 @@ class MusicDispatcher {
         this.queue.length = 0;
         this.player.connection.disconnect();
         this.client.queue.delete(this.guild.id);
-        this.text.send({ embeds: [util.embed().setDescription('Queue Is Empty').setColor('GREEN')], allowedMentions: { repliedUser: false } }).catch(() => null);
+        this.text.send({ embeds: [util.embed().setDescription('Destroyed the player and left the voice channel').setColor('GREEN')], allowedMentions: { repliedUser: false } }).catch(() => null);
     }
 }
 
