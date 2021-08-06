@@ -30,7 +30,7 @@ class ShoukakuHandler extends Shoukaku {
         this.on('disconnect', (name, players, moved) =>
             client.logger.log(chalk.yellowBright(`LAVALINK => ${name}: Disconnected`, moved ? 'players have been moved' : 'players have been disconnected'))
         );
-
+ 
         this.on('debug', (name, reason) =>
             client.logger.log(chalk.yellowBright`LAVALINK => ${name}`, reason || 'No reason')
         );
