@@ -51,7 +51,7 @@ module.exports = {
                 }
             }
         }
-        // if some one execute owneronly it returns nothing or if you want it to reply just remove the /* */
+        // if some one execute a command which is owneronly it returns nothing or if you want it to reply just remove the /* */
         if (command.owneronly) {
             if (!client.config.owners.includes(message.author.id)) return /*message.reply('Sorry, this command can only be used by the bot owners.')*/;
         }
