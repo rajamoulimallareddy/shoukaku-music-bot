@@ -13,7 +13,7 @@ module.exports = {
         const MusicDispatcher = client.queue.get(message.guild.id);
         if (!MusicDispatcher || !MusicDispatcher.current)
             return await message.reply({ embeds: [client.util.embed().setDescription('There is Nothing playing in thie guild.').setColor('RED')], allowedMentions: { repliedUser: false } });
-        if (MusicDispatcher.player.connection.channelID !== message.member.voice.channelId)
+        if (MusicDispatcher.player.connection.channelId !== message.member.voice.channelId)
             return await message.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')], allowedMentions: { repliedUser: false } });
 
         try {

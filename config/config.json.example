@@ -4,14 +4,15 @@
     "owners": [
         ""
     ],
+    "mongo_uri": "",
     "colors": {
         "default": "606C65",
         "error": "FF4500"
     },
     "nodes": [
         {
-            "name": "Node-01",
-            "url": "localhost:2333",
+            "name": "Your Node name",
+            "url": "your host: your port",
             "auth": "youshallnotpass",
             "secure": false
         }

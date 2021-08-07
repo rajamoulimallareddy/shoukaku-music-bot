@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-const util = require('../config/utility.js');
+const util = require('../config/Utilities.js');
 
 class MusicDispatcher {
     constructor(options) {
@@ -13,17 +13,17 @@ class MusicDispatcher {
 
         this.player.on('start', () => {
             const embed = util.embed()
-                .setTitle('Now Playing:')
-                .setDescription(`${this.current.info.isStream ? '[StreamingLive]\n' : ''}[${this.current.info.title}](${this.current.info.uri}) (${util.millisToDuration(this.current.info.length)}) - ${this.current.info.requester}`);
+                .setTitle('Now Playing')
+                .setDescription(`${this.current.info.isStream ? '[StreamingLive]\n' : ''}[${this.current.info.title}](${this.current.info.uri}) [${this.current.info.requester}]`);
             this.text.send({ embeds: [embed], allowedMentions: { repliedUser: false } });
         }).on('end', () => {
             this.previous = this.current;
             this.current = null;
             this.play();
-        }).on('trackException', e => {
+        }).on('trackException', error => {
             if (!this.player) return;
             this.text.send({ embeds: [util.embed().setAuthor('Something went wrong with playing the Track').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})`)], allowedMentions: { repliedUser: false } });
-            this.client.logger.debug('TrackException', e);
+            this.client.logger.debug('TrackException', error);
         }).on('error', console.error);
 
         for (const event of ['closed', 'error']) {
@@ -42,7 +42,7 @@ class MusicDispatcher {
     async play() {
         if (!this.exists || !this.queue.length) return this.destroy();
         this.current = this.queue.shift();
-        this.player.setVolume(0.25);
+        this.player.setVolume(0.3);
         this.player.playTrack(this.current.track);
     }
 

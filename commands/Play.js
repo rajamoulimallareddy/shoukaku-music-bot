@@ -6,6 +6,7 @@ module.exports = {
     guildOnly: false,
     args: false,
     usage: '[search/link]',
+    botPerms: ['CONNECT', 'SPEAK', 'SEND_MESSAGES'],
     execute: async (message, args, client) => {
         if (!message.member.voice.channelId) {
             return await message.reply({ embeds: [client.util.embed().setDescription('you are not in a voice channel to perform this.').setColor('RED')], allowedMentions: { repliedUser: false } });
@@ -34,6 +35,7 @@ module.exports = {
             if (isPlaylist) {
                 for (const track of tracks) await client.queue.handle(node, track, message);
             }
+            if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
             if (MusicDispatcher && !MusicDispatcher.player.paused)
                 await message.reply(isPlaylist ?
                     {
@@ -44,7 +46,7 @@ module.exports = {
                     {
                         embeds: [client.util.embed()
                             .setAuthor(`Queued at Poisition #${MusicDispatcher.queue.length}`)
-                            .setDescription(` ${track.info.isStream ? '[StreamingLive]\n' : ''}[${track.info.title}](${track.info.uri}) (${client.util.millisToDuration(track.info.length)})`).setColor('GREEN')], allowedMentions: { repliedUser: false }
+                            .setDescription(` ${track.info.isStream ? '[StreamingLive]\n' : ''}[${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
                     }
                 ).catch(() => null);
             if (res) await res.play();
@@ -57,11 +59,12 @@ module.exports = {
         const track = searchData.tracks.shift();
         track.info.requester = message.author;
         const res = await client.queue.handle(node, track, message);
+        if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
         if (MusicDispatcher && !MusicDispatcher.player.paused)
             await message.reply({
                 embeds: [client.util.embed()
                     .setAuthor(`Queued at Poisition #${MusicDispatcher.queue.length}`)
-                    .setDescription(`[${track.info.title}](${track.info.uri}) (${client.util.millisToDuration(track.info.length)})`).setColor('GREEN')], allowedMentions: { repliedUser: false }
+                    .setDescription(`[${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
             }).catch(() => null);
         if (res) await res.play();
     }

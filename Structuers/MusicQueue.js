@@ -12,9 +12,9 @@ class MusicQueue extends Map {
 
         if (!existing) {
             const player = await node.joinChannel({
-                guildID: message.guild.id,
-                shardID: message.guild.shard.id,
-                channelID: message.member.voice.channelId,
+                guildId: message.guild.id,
+                shardId: message.guild.shardId,
+                channelId: message.member.voice.channelId,
                 deaf: true
             });
             this.client.logger.debug(player.constructor.name, `New connection @ guild "${message.guild.id}"`);

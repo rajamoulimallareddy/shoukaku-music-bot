@@ -7,8 +7,8 @@ module.exports = {
     aliases: ['evaluate'],
     guildOnly: false,
     args: false,
-    usage: '[command name]',
-    ownerOnly: true,
+    usage: '',
+    owneronly: true,
     execute: async (message, args, client) => {
 
         const content = message.content.split(' ').slice(1).join(' ');

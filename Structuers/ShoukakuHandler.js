@@ -3,7 +3,7 @@ const { Shoukaku, Libraries } = require('shoukaku');
 const chalk = require('chalk');
 const config = require('../config/config.json');
 const LavalinkServers = config.nodes;
-const shoukakuOptions = {
+const options = {
     moveOnDisconnect: false,
     resumable: false,
     resumableTimeout: 30,
@@ -13,10 +13,10 @@ const shoukakuOptions = {
 
 class ShoukakuHandler extends Shoukaku {
     constructor(client) {
-        super(new Libraries.DiscordJS(client), LavalinkServers, shoukakuOptions);
+        super(new Libraries.DiscordJS(client), LavalinkServers, options);
 
         this.on('ready', (name, resumed) =>
-            client.logger.log(chalk.green(`LAVALINK => [STATUS] ${name} successfully connected.`, `This connection is ${resumed ? 'resumed' : 'a new connection'}`))
+            client.logger.log(`LAVALINK => [STATUS] ${name} successfully connected.`, ` This connection is ${resumed ? 'resumed' : 'a new connection'}`)
         );
 
         this.on('error', (name, error) =>
@@ -30,7 +30,7 @@ class ShoukakuHandler extends Shoukaku {
         this.on('disconnect', (name, players, moved) =>
             client.logger.log(chalk.yellowBright(`LAVALINK => ${name}: Disconnected`, moved ? 'players have been moved' : 'players have been disconnected'))
         );
- 
+
         this.on('debug', (name, reason) =>
             client.logger.log(chalk.yellowBright`LAVALINK => ${name}`, reason || 'No reason')
         );

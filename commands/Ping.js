@@ -8,7 +8,7 @@ module.exports = {
     guildOnly: false,
     args: false,
     usage: '',
-    ownerOnly: true,
+    owneronly: false,
     execute: async (message, args, client) => {
         const msg = await message.reply({ content: 'Pinging...', allowedMentions: { repliedUser: false } });
         let clientStats = stripIndent`
@@ -18,10 +18,7 @@ module.exports = {
 
         const embed = client.util
             .embed()
-            .setAuthor(
-                ' |   Pong',
-                message.author.displayAvatarURL({ dynamic: true })
-            )
+            .setAuthor(' |   Pong', message.author.displayAvatarURL({ dynamic: true }))
             .setDescription(`\`\`\`nim\n${clientStats}\`\`\``);
         msg.edit({ content: ' ', embeds: [embed], allowedMentions: { repliedUser: false } });
     }

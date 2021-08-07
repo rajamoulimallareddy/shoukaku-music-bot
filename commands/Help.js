@@ -3,6 +3,7 @@
 /* eslint-disable linebreak-style */
 const { colors } = require('../config/config.json');
 const embedColor = colors.default;
+const pSchema = require('../schemas/PrefixSchema.js');
 
 module.exports = {
     name: 'help',
@@ -13,7 +14,8 @@ module.exports = {
     usage: '[command name]',
     execute: async (message, args, client) => {
         const { commands } = message.client;
-
+        let data = await pSchema.findOne({ ID: message.guild.id });
+        const prefix = data ? data.PREFIX : client.config.prefix;
         if (!args.length) {
             const cmdHelpEmbed = client.util.embed()
                 .setAuthor('HELP')
@@ -22,9 +24,10 @@ module.exports = {
                         .map((command) => command.name)
                         .join(
                             ' | ',
-                        )}\`\nYou can use \`${client.config.prefix}help {command name}\` to get info about a specific command!`,
+                        )}\``,
                 )
-                .setColor(embedColor);
+                .setColor(embedColor)
+                .setFooter(`You can use ${prefix}help {command name} to get info about a specific command!`);
             return message.reply({ embeds: [cmdHelpEmbed], allowedMentions: { repliedUser: false } });
         }
 
@@ -32,16 +35,19 @@ module.exports = {
         const command =
             commands.get(name) ||
             commands.find((cmd) => cmd.aliases && cmd.aliases.includes(name));
-
+        if (command.owneronly) return;
         if (!command) {
-            return message.reply({ contents: ['This command does not exist!'], allowedMentions: { repliedUser: false } });
+            return message.reply({
+                embeds: [client.util.embed()
+                    .setDescription(' |  I couldn\'t find that command')], allowedMentions: { repliedUser: false }
+            });
         }
         const cmdHelpEmbed = client.util.embed()
-            .setTitle(`${command.name} | Command info`)
+            .setTitle(`Command info | ${command.name}`)
             .setDescription(command.description)
             .addField(
                 'Usage',
-                `\`${client.config.prefix + command.name} ${command.usage}\``,
+                `\`${prefix + command.name} ${command.usage}\``,
                 true,
             )
             .setColor(embedColor);

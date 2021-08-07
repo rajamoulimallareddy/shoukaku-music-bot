@@ -8,11 +8,13 @@
     "chalk": "^4.1.2",
     "common-tags": "^1.8.0",
     "discord.js": "^13.0.0",
+    "mongoose": "^5.13.5",
     "pretty-ms": "^7.0.1",
-    "shoukaku": "github:Deivu/Shoukaku#next"
+    "shoukaku": "github:Deivu/Shoukaku#next",
+    "string-progressbar": "^1.0.4"
   },
   "devDependencies": {
-    "eslint": "^7.31.0"
+    "eslint": "^7.32.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

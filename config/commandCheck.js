@@ -1,8 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style
-// eslint-disable-next-line no-prototype-builtins
 const checkCommandModule = (cmdName, cmdModule) => {
 
     if (!cmdModule.hasOwnProperty('execute')) { throw new Error(`${cmdName} command module does not have property 'execute'`); }
