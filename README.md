@@ -16,23 +16,21 @@ Go to config/config.json.example rename it file's name into config.json.
 
 ```json
 {
-    "prefix": "Your_Prefix",
-    "token": "Your Token",
-    "owners": [
-        "Your Discord Id for eval & owner only Commands"
-    ],
-    "colors": {
-        "default": "606C65",
-        "error": "FF4500"
-    },
-    "nodes": [
-        {
-            "name": "NODE-00",
-            "url": ,
-            "auth": "youshallnotpass",
-            "secure": false
-        }
-    ]
+  "prefix": "Your_Prefix",
+  "token": "Your Token",
+  "owners": ["Your Discord Id for eval & owner only Commands"],
+  "colors": {
+    "default": "606C65",
+    "error": "FF4500"
+  },
+  "nodes": [
+    {
+      "name": "Your Node name",
+      "url": "your host: your port",
+      "auth": "youshallnotpass",
+      "secure": false
+    }
+  ]
 }
 ```
 
