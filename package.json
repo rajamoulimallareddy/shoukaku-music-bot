@@ -17,7 +17,8 @@
     "eslint": "^7.32.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node lavalink-music-bot.js"  
   },
   "repository": {
     "type": "git",
