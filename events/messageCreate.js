@@ -21,7 +21,7 @@ module.exports = {
         // if it is a bot which used the command or mentioned it returns & if content dosent starts with prefix or mention prefix
         if (!message.content.toLowerCase().startsWith(DBPREFIX) || message.author.bot) return;
         // 
-        const [commandName, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
+        const [commandName, ...args] = message.content.slice(DBPREFIX.length).trim().split(/ +/g);
         // search for command or prefix and then reply  
         const command = client.commands.get(commandName.toLowerCase()) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName.toLowerCase()));
         // if some one accidentally type command which is not in help it returns
@@ -59,7 +59,7 @@ module.exports = {
         if (command.args && !args.length) {
             let reply = `You didn't provide any arguments, ${message.author}!`;
             if (command.usage) {
-                reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+                reply += `\nThe proper usage would be: \`${DBPREFIX}${command.name} ${command.usage}\``;
             }
             return message.reply(reply);
         }

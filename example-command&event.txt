@@ -1,0 +1,25 @@
+/* eslint-disable linebreak-style */
+module.exports = {
+    name: '', //command name
+    description: '', // commands description 
+    aliases: [''], // command aliases
+    guildOnly: , // true or false
+    args: , // true or false
+    usage: '', // [your usage or leave it blank]
+    owneronly: false,
+    userPerms: [''], // ['']
+    botPerms: [''] // for example ['MANAGE_GUILD','SEND_MESSAGES']
+    execute: async (message, args, client) => {
+
+    }
+};
+
+-------------------------
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line linebreak-style
+
+module.exports = {
+    event: '', // evnt name
+    run() {
+    },
+};
