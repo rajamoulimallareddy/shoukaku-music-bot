@@ -53,6 +53,7 @@ Made With Hate by 🖤 ARESᴮᴱ ᴿ⁴ᴬ#1773
 ## NOTE $ LINKS
 
 > Shoukaku Docs: https://deivu.github.io/Shoukaku/?api
+
 > Shoukaku support Server: https://discord.gg/FVqbtGu
 
 Some parts of the code has been taken from [Kongou](https://github.com/Deivu/Kongou)
