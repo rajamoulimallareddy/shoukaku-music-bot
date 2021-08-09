@@ -3,7 +3,7 @@
 /* eslint-disable linebreak-style */
 const { MessageEmbed } = require('discord.js');
 const prettyMilliseconds = require('pretty-ms');
-
+const config = require('../config/config.json');
 module.exports = class Util {
     static embed() {
         return new MessageEmbed()
@@ -34,4 +34,10 @@ module.exports = class Util {
         return arr;
     }
 
+    static checkPermission(permissions, interaction) {
+        if (permissions.includes('OWNER'))
+            return config.owners.includes(interaction.user.id);
+        else
+            return interaction.channel.permissionsFor(interaction.member).has(permissions);
+    }
 };

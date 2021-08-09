@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-const permissions = require('../config/permission.json');
+const permissions = require('../sturcturesExtends/permission.json');
 const PrefixSchema = require('../schemas/PrefixSchema.js');
 module.exports = {
     event: 'messageCreate',
@@ -15,7 +15,7 @@ module.exports = {
         // to acces both prefix and mention prefix
         const DBPREFIX = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : prefix;
         // if bot has permission to send message else it stops 
-        if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
+        if (!message.channel.permissionsFor(client.user.id).has('SEND_MESSAGES')) return;
         // when the bot is mentioned it returns bot prefix
         if (message.content.match(mentionRegex)) message.reply({ embeds: [client.util.embed().setDescription(`This server's prefix is \`${DBPREFIX}\``)], allowedMentions: { repliedUser: false } });
         // if it is a bot which used the command or mentioned it returns & if content dosent starts with prefix or mention prefix
@@ -64,6 +64,7 @@ module.exports = {
             return message.reply(reply);
         }
         try {
+            // excute/run commands
             command.execute(message, args, client);
         }
         catch (error) {

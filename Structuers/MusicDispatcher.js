@@ -1,6 +1,4 @@
 /* eslint-disable linebreak-style */
-const util = require('../config/Utilities.js');
-
 class MusicDispatcher {
     constructor(options) {
         this.client = options.client;
@@ -12,17 +10,17 @@ class MusicDispatcher {
         this.previous = null;
 
         this.player.on('start', () => {
-            const embed = util.embed()
+            const embed = this.client.util.embed()
                 .setTitle('Now Playing')
                 .setDescription(`${this.current.info.isStream ? '[StreamingLive]\n' : ''}[${this.current.info.title}](${this.current.info.uri}) [${this.current.info.requester}]`);
-            this.text.send({ embeds: [embed], allowedMentions: { repliedUser: false } });
+            this.text.send({ embeds: [embed] });
         }).on('end', () => {
             this.previous = this.current;
             this.current = null;
             this.play();
         }).on('trackException', error => {
             if (!this.player) return;
-            this.text.send({ embeds: [util.embed().setAuthor('Something went wrong with playing the Track').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})`)], allowedMentions: { repliedUser: false } });
+            this.text.send({ embeds: [this.client.util.embed().setAuthor('Something went wrong with playing the Track').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})`)] });
             this.client.logger.debug('TrackException', error);
         }).on('error', console.error);
 
@@ -75,7 +73,7 @@ class MusicDispatcher {
         this.queue.length = 0;
         this.player.connection.disconnect();
         this.client.queue.delete(this.guild.id);
-        this.text.send({ embeds: [util.embed().setDescription('Destroyed the player and left the voice channel').setColor('GREEN')], allowedMentions: { repliedUser: false } }).catch(() => null);
+        this.text.send({ embeds: [this.client.util.embed().setDescription('Destroyed the player and left the voice channel').setColor('GREEN')] }).catch(() => null);
     }
 }
 

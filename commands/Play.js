@@ -30,10 +30,10 @@ module.exports = {
             const track = tracks.shift();
             track.info.requester = message.author;
             const isPlaylist = type === 'PLAYLIST';
-            const res = await client.queue.handle(node, track, message);
+            const res = await client.queue.handle(message.guild, message.member, message.channel, node, track);
 
             if (isPlaylist) {
-                for (const track of tracks) await client.queue.handle(node, track, message);
+                for (const track of tracks) await client.queue.handle(message.guild, message.member, message.channel, node, track);
             }
             if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
             if (MusicDispatcher && !MusicDispatcher.player.paused)
@@ -45,11 +45,10 @@ module.exports = {
                     :
                     {
                         embeds: [client.util.embed()
-                            .setAuthor(`Queued at Poisition #${MusicDispatcher.queue.length}`)
-                            .setDescription(` ${track.info.isStream ? '[StreamingLive]\n' : ''}[${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
+                            .setDescription(`Queued ${track.info.isStream ? '[StreamingLive]\n' : ''}[${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
                     }
                 ).catch(() => null);
-            if (res) await res.play();
+            res?.play();
             return;
         }
         SearchQuery = args.join(' ');
@@ -58,15 +57,14 @@ module.exports = {
             return await message.reply({ embeds: [client.util.embed().setDescription('Couldn\'t find Anything in the Given SearchQuery').setColor('RED')], allowedMentions: { repliedUser: false } });
         const track = searchData.tracks.shift();
         track.info.requester = message.author;
-        const res = await client.queue.handle(node, track, message);
+        const res = await client.queue.handle(message.guild, message.member, message.channel, node, track);
         if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
         if (MusicDispatcher && !MusicDispatcher.player.paused)
             await message.reply({
                 embeds: [client.util.embed()
-                    .setAuthor(`Queued at Poisition #${MusicDispatcher.queue.length}`)
-                    .setDescription(`[${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
+                    .setDescription(`Queued [${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
             }).catch(() => null);
-        if (res) await res.play();
+        res?.play();
     }
 };
 function _checkURL(string) {

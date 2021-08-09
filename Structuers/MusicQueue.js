@@ -6,38 +6,32 @@ class MusicQueue extends Map {
         super(iterable);
         this.client = client;
     }
-    async handle(node, track, message) {
-
-        const existing = this.get(message.guild.id);
+    async handle(guild, member, channel, node, track) {
+        const existing = this.get(guild.id);
 
         if (!existing) {
             const player = await node.joinChannel({
-                guildId: message.guild.id,
-                shardId: message.guild.shardId,
-                channelId: message.member.voice.channelId,
+                guildId: guild.id,
+                shardId: guild.shardId,
+                channelId: member.voice.channelId,
                 deaf: true
             });
-            this.client.logger.debug(player.constructor.name, `New connection @ guild "${message.guild.id}"`);
-
-            if (message.guild.me.voice.serverMute === false) {
-                message.guild.me.voice.setDeaf(true);
-            }
+            this.client.logger.debug(player.constructor.name, `New connection @ guild "${guild.id}"`);
 
             const dispatcher = new MusicDispatcher({
                 client: this.client,
-                guild: message.guild,
-                text: message.channel,
+                guild: guild,
+                text: channel,
                 player
             });
 
             dispatcher.queue.push(track);
-            this.set(message.guild.id, dispatcher);
-            this.client.logger.debug(dispatcher.constructor.name, `New player dispatcher @ guild "${message.guild.id}"`);
+            this.set(guild.id, dispatcher);
+            this.client.logger.debug(dispatcher.constructor.name, `New player dispatcher @ guild "${guild.id}"`);
             return dispatcher;
-
         }
         existing.queue.push(track);
-        if (!existing.current) existing.play();
+        if (!existing.current) await existing.play();
         return null;
     }
 }

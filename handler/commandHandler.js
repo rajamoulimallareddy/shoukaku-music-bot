@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line linebreak-style
 const ascii = require('ascii-table');
-const commandCheck = require('./../config/commandCheck');
+const commandCheck = require('./../sturcturesExtends/commandCheck');
 const table = new ascii().setHeading('command', 'Load Status');
 
 module.exports = (err, files, client) => {
