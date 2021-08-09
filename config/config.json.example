@@ -15,7 +15,7 @@
     "nodes": [
         {
             "name": "Your Node name",
-            "url": "your host: your port",
+            "url": "your host:your port",
             "auth": "youshallnotpass",
             "secure": false
         }

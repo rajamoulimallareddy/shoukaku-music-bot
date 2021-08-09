@@ -13,12 +13,16 @@ A music bot which is feature rich and best quality Music.
 ## Config & Bot Startup
 
 Go to config/config.json.example rename it file's name into config.json.
+Do `npm run slash` update slash commands of your bot
 
 ```json
 {
   "prefix": "Your_Prefix",
   "token": "Your Token",
   "owners": ["Your Discord Id for eval & owner only Commands"],
+  "dev": false,
+  "guildId": "your guild's id, where you want the slash commands to be updated, when you enabled dev mode, disabling dev mode, means pushes new commands globally",
+  "clientId": "Bots id",
   "colors": {
     "default": "606C65",
     "error": "FF4500"
@@ -26,7 +30,7 @@ Go to config/config.json.example rename it file's name into config.json.
   "nodes": [
     {
       "name": "Your Node name",
-      "url": "your host: your port",
+      "url": "your host:your port",
       "auth": "youshallnotpass",
       "secure": false
     }
