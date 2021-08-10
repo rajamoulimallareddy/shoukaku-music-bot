@@ -14,8 +14,8 @@ module.exports = {
             if (MusicDispatcher.player.paused) return interaction.reply({ embeds: [client.util.embed().setDescription('Player is Already Paused')] });
             await MusicDispatcher.pause();
             interaction.reply({ embeds: [client.util.embed().setDescription('Player Is Now Paused')] });
-        } catch (err) {
-            console.log(err.message);
+        } catch (error) {
+            interaction.reply(`${error.message}`);
         }
     }
 };

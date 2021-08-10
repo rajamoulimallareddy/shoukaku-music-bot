@@ -34,8 +34,8 @@ module.exports = {
                         .setDescription(`The playback volume is now set to: \`${newVolume}\``)], allowedMentions: { repliedUser: false }
                 });
             }
-        } catch (err) {
-            console.log(err.message);
+        } catch (error) {
+            message.channel.send(`${error.message}`);
         }
     }
 };

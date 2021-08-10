@@ -8,6 +8,7 @@ class MusicDispatcher {
         this.queue = [];
         this.current = null;
         this.previous = null;
+        this.end = false;
 
         this.player.on('start', () => {
             const embed = this.client.util.embed()
@@ -73,6 +74,7 @@ class MusicDispatcher {
         this.queue.length = 0;
         this.player.connection.disconnect();
         this.client.queue.delete(this.guild.id);
+        if (this.end) return;
         this.text.send({ embeds: [this.client.util.embed().setDescription('Destroyed the player and left the voice channel').setColor('GREEN')] }).catch(() => null);
     }
 }

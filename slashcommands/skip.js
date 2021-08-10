@@ -3,7 +3,6 @@ module.exports = {
     name: 'skip',
     description: 'skips currently playing track',
     execute: async ({ interaction, client }) => {
-
         if (!interaction.member.voice.channelId)
             return await interaction.reply({ embeds: [client.util.embed().setDescription('You are not in a voice channel to perform this.').setColor('RED')] });
         const MusicDispatcher = client.queue.get(interaction.guild.id);
@@ -13,8 +12,9 @@ module.exports = {
             return await interaction.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')] });
         try {
             await MusicDispatcher.skip();
-        } catch (err) {
-            console.log(err.message);
+            interaction.reply({ embeds: [client.util.embed().setDescription('Skippes the song')] });
+        } catch (error) {
+            interaction.reply(`${error.message}`);
         }
     }
 };

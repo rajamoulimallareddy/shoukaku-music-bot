@@ -33,7 +33,6 @@ module.exports = {
             message.channel.send({ embeds: [client.util.embed().setDescription(`Seeked to ${client.util.millisToDuration(durationMs)}.`)], allowedMentions: { repliedUser: false } });
         } catch (err) {
             message.channel.send(`${err.message}`);
-
         }
 
     }

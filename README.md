@@ -38,7 +38,11 @@ Do `npm run slash` update slash commands of your bot
 }
 ```
 
-Secure Should be False if Your are using local lavalink. If Your node is using ssl keep it to true. To run the Bot just type `npm start`
+Secure Should be False if Your are using local lavalink. If Your node is using ssl keep it to true.
+
+To run the Bot just type `npm start`
+
+> To Run it using pm2 `pm2 start lavalink-music-bot.js`
 
 ## ABOUT & INFO
 

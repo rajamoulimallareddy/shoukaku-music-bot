@@ -7,7 +7,7 @@ module.exports = {
     options: [{
         name: 'input',
         type: ApplicationCommandOptionType.String,
-        description: 'type in volume',
+        description: 'type in volume between 0-500',
         required: true,
     }],
     execute: async ({ interaction, client }) => {
@@ -21,6 +21,9 @@ module.exports = {
             return await interaction.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')] });
 
         try {
+            if (newVolume && isNaN(newVolume)) {
+                return interaction.reply({ embeds: [client.util.embed().setDescription('Wrong Usage E.g., volume `input:`<0-500>')], allowedMentions: { repliedUser: false } });
+            }
             if (newVolume < 0 || newVolume > 500)
                 return interaction.reply({
                     embeds: [this.client.util.embed()

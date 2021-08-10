@@ -37,9 +37,8 @@ module.exports = {
             interaction.reply({
                 embeds: [client.util.embed().setDescription(`Seeked to \`${client.util.millisToDuration(durationMs)}\``)], allowedMentions: { repliedUser: false }
             });
-        } catch (err) {
-            interaction.reply(`${err.message}`);
-
+        } catch (error) {
+            interaction.reply(`${error.message}`);
         }
 
     }

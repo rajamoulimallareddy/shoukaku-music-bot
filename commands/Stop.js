@@ -17,8 +17,8 @@ module.exports = {
         try {
             await MusicDispatcher.stop();
             message.react('👋').catch(e => e);
-        } catch (err) {
-            console.log(err.message);
+        } catch (error) {
+            message.channel.send(`${error.message}`);
         }
     }
 };

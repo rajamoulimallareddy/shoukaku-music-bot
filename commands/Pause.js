@@ -18,8 +18,8 @@ module.exports = {
             if (MusicDispatcher.player.paused) return message.reply({ embeds: [client.util.embed().setDescription('Player is Already Paused')], allowedMentions: { repliedUser: false } });
             await MusicDispatcher.pause();
             message.react('⏸️').catch(e => e);
-        } catch (err) {
-            console.log(err.message);
+        } catch (error) {
+            message.channel.send(`${error.message}`);
         }
     }
 };
