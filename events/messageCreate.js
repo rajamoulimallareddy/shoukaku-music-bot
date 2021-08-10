@@ -14,8 +14,6 @@ module.exports = {
         const prefix = data ? data.PREFIX : client.config.prefix;
         // to acces both prefix and mention prefix
         const DBPREFIX = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : prefix;
-        // if bot has permission to send message else it stops 
-        if (!message.channel.permissionsFor(client.user.id).has('SEND_MESSAGES')) return;
         // when the bot is mentioned it returns bot prefix
         if (message.content.match(mentionRegex)) message.reply({ embeds: [client.util.embed().setDescription(`This server's prefix is \`${DBPREFIX}\``)], allowedMentions: { repliedUser: false } });
         // if it is a bot which used the command or mentioned it returns & if content dosent starts with prefix or mention prefix
