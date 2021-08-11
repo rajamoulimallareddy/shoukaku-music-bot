@@ -20,22 +20,22 @@ module.exports = {
         if (MusicDispatcher.player.connection.channelId !== interaction.member.voice.channelId)
             return await interaction.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')] });
         if (!MusicDispatcher.current.info.isSeekable)
-            return interaction.reply({ embeds: [client.util.embed().setDescription('Current track isn\'t seekable.')], allowedMentions: { repliedUser: false } });
+            return interaction.reply({ embeds: [client.util.embed().setDescription('Current track isn\'t seekable.')] });
         const duration = interaction.options.getString('seconds', true);
         if (!duration && !isNaN(duration)) {
-            return interaction.reply({ embeds: [client.util.embed().setDescription('You must provide a time format to seek')], allowedMentions: { repliedUser: false } });
+            return interaction.reply({ embeds: [client.util.embed().setDescription('You must provide a time format to seek')] });
         } else if (duration && isNaN(duration)) {
-            return interaction.reply({ embeds: [client.util.embed().setDescription('Wrong Usage E.g., `seek<seconds>`')], allowedMentions: { repliedUser: false } });
+            return interaction.reply({ embeds: [client.util.embed().setDescription('Wrong Usage E.g., `seek<seconds>`')] });
         }
 
         const durationMs = client.util.durationToMillis(duration);
         if (durationMs > MusicDispatcher.current.info.length)
-            return interaction.reply({ embeds: [client.util.embed().setDescription('The duration you provide exceeds the duration of the current track')], allowedMentions: { repliedUser: false } });
+            return interaction.reply({ embeds: [client.util.embed().setDescription('The duration you provide exceeds the duration of the current track')] });
 
         try {
             await MusicDispatcher.player.seekTo(duration * 1000);
             interaction.reply({
-                embeds: [client.util.embed().setDescription(`Seeked to \`${client.util.millisToDuration(durationMs)}\``)], allowedMentions: { repliedUser: false }
+                embeds: [client.util.embed().setDescription(`Seeked to \`${client.util.millisToDuration(durationMs)}\``)]
             });
         } catch (error) {
             interaction.reply(`${error.message}`);

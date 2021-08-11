@@ -33,4 +33,4 @@ const rest = new REST({ version: '9' }).setToken(token);
         console.error(error);
     }
 })();
-// some part of implementation of interaction code is take from github.com/Deivu/Kongou 
+// some part of implementation of interaction code is take from github.com/Deivu/Kongou
