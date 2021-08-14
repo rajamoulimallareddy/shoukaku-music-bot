@@ -33,7 +33,7 @@ module.exports = {
                 if (playlist) {
                     for (const track of tracks) await client.queue.handle(interaction.guild, interaction.member, interaction.channel, node, track);
                 }
-                await interaction.editReply(isPlaylist ?
+                await interaction.editReply(playlist ?
                     {
                         embeds: [client.util.embed()
                             .setDescription(`Loaded **${tracks.length}** tracks from: \`${playlistName}\``).setColor('GREEN')]
