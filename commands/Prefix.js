@@ -38,7 +38,7 @@ module.exports = {
             });
         }
 
-        message.channel.send({
+        message.reply({
             embeds: [client.util.embed()
                 .setDescription(`Set New Prefix To: \`${newPrefix}\``)], allowedMentions: { repliedUser: false }
         }).catch((err) => { console.log(err.msg); });

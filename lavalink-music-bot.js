@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const mongoose = require('mongoose');
 const client = new Discord.Client({
     allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
-    intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_VOICE_STATES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'],
+    intents: ['GUILDS', 'GUILD_VOICE_STATES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'],
     restTimeOffset: 0
 });
 const MusicQueue = require('./Structuers/MusicQueue.js'), ShoukakuHandler = require('./Structuers/ShoukakuHandler.js'), loggerHandler = require('./handler/Shoukakulogger.js');
@@ -33,12 +33,7 @@ fs.readdir('./slashcommands/', (err, files) => {
     InteractionHandler(err, files, client);
 });
 
-mongoose.connect(client.config.mongo_uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    autoIndex: true,
-    useFindAndModify: true
-}).then(() => {
+mongoose.connect(client.config.mongo_uri).then(() => {
     client.logger.log('DATABASE', 'Connected to database.');
 }).catch(() => {
     client.logger.log('MONGODB', 'URI is either not provided or invalid.');

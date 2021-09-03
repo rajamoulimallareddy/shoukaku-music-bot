@@ -4,7 +4,6 @@ const { stripIndent } = require('common-tags');
 module.exports = {
     name: 'ping',
     description: 'Shows Ping',
-    aliases: [],
     guildOnly: false,
     args: false,
     usage: '',

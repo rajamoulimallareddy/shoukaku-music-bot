@@ -21,7 +21,6 @@ module.exports = {
             await interaction.deferReply();
             let SearchQuery = interaction.options.getString('query', true);
             const node = client.shoukaku.getNode();
-
             if (checkURL(SearchQuery)) {
                 const result = await node.rest.resolve(SearchQuery);
                 if (!result)
@@ -31,7 +30,11 @@ module.exports = {
                 const playlist = type === 'PLAYLIST';
                 const res = await client.queue.handle(interaction.guild, interaction.member, interaction.channel, node, track);
                 if (playlist) {
-                    for (const track of tracks) await client.queue.handle(interaction.guild, interaction.member, interaction.channel, node, track);
+                    for (const track of tracks) {
+                        track.info.requester = interaction.member.user
+                        if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}…`;
+                        await client.queue.handle(interaction.guild, interaction.member, interaction.channel, node, track);
+                    }
                 }
                 await interaction.editReply(isPlaylist ?
                     {
@@ -44,15 +47,15 @@ module.exports = {
                             .setDescription(`Queued ${track.info.isStream ? '[StreamingLive]\n' : ''}[${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')]
                     }
                 ).catch(() => null);
-                res?.play();
+                if (res) res.play();
                 return;
             }
             const tracksearch = await node.rest.resolve(SearchQuery, 'youtube');
             if (!tracksearch?.tracks.length)
                 return interaction.editReply({ embeds: [client.util.embed().setDescription('Couldn\'t find Anything in the Given SearchQuery').setColor('RED')] });
             const track = tracksearch.tracks.shift();
-            track.info.requester = interaction.member;
-            if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
+            track.info.requester = interaction.member.user;
+            if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}…`;
             const res = await client.queue.handle(interaction.guild, interaction.member, interaction.channel, node, track);
             await interaction
                 .editReply({

@@ -18,7 +18,7 @@ module.exports = {
             if (!MusicDispatcher.previous) return message.channel.send({ embeds: [client.util.embed().setDescription('There Is No Previous Track To Play')], allowedMentions: { repliedUser: false } });
             MusicDispatcher.queue.unshift(MusicDispatcher.previous);
             await MusicDispatcher.skip();
-            message.channel.send({ embeds: [client.util.embed().setDescription(`Skipped To Previous Song [${MusicDispatcher.previous.info.title}](${MusicDispatcher.previous.info.uri}) - [${MusicDispatcher.previous.info.requester}]`)], allowedMentions: { repliedUser: false } });
+            message.reply({ embeds: [client.util.embed().setDescription(`Skipped To Previous Song [${MusicDispatcher.previous.info.title}](${MusicDispatcher.previous.info.uri}) - [${MusicDispatcher.previous.info.requester}]`)], allowedMentions: { repliedUser: false } });
             message.react('🔙').catch(e => e);
         } catch (error) {
             message.channel.send(`${error.message}`);

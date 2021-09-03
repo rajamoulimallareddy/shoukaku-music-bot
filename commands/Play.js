@@ -16,7 +16,6 @@ module.exports = {
         }
         try {
             const MusicDispatcher = client.queue.get(message.guild.id);
-
             if (!args[0])
                 return await message.reply({ embeds: [client.util.embed().setDescription('you did not specify a link or search mode').setColor('RED')], allowedMentions: { repliedUser: false } });
 
@@ -34,10 +33,13 @@ module.exports = {
                 const res = await client.queue.handle(message.guild, message.member, message.channel, node, track);
 
                 if (isPlaylist) {
-                    for (const track of tracks) await client.queue.handle(message.guild, message.member, message.channel, node, track);
+                    for (const track of tracks) {
+                        track.info.requester = message.author
+                        if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}…`;
+                        await client.queue.handle(message.guild, message.member, message.channel, node, track);
+                    }
                 }
-                if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
-                if (MusicDispatcher && !MusicDispatcher.player.paused)
+                if (MusicDispatcher)
                     await message.reply(isPlaylist ?
                         {
                             embeds: [client.util.embed()
@@ -60,14 +62,14 @@ module.exports = {
             track.info.requester = message.author;
             const res = await client.queue.handle(message.guild, message.member, message.channel, node, track);
             if (track.info.title.length > 64) track.info.title = `${track.info.title.split('[').join('[').split(']').join(']').substr(0, 64)}...`;
-            if (MusicDispatcher && !MusicDispatcher.player.paused)
+            if (MusicDispatcher)
                 await message.reply({
                     embeds: [client.util.embed()
                         .setDescription(`Queued [${track.info.title}](${track.info.uri}) [${track.info.requester}]`).setColor('GREEN')], allowedMentions: { repliedUser: false }
                 }).catch(() => null);
             res?.play();
         } catch (error) {
-            message.channel.send(`${error.message}`);
+            message.reply(`${error.message}`);
         }
     }
 };

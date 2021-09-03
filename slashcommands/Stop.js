@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 const Wait = require('util').promisify(setTimeout);
-
 module.exports = {
     name: 'stop',
     description: 'clears the queue and destroys the player',

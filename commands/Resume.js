@@ -2,7 +2,6 @@
 module.exports = {
     name: 'resume',
     description: 'Resumes the paused Player.',
-    aliases: [],
     guildOnly: false,
     args: false,
     usage: '',

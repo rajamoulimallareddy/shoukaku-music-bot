@@ -20,7 +20,6 @@ class MusicDispatcher {
             this.current = null;
             this.play();
         }).on('trackException', error => {
-            if (!this.player) return;
             this.text.send({ embeds: [this.client.util.embed().setAuthor('Something went wrong with playing the Track').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})`)] });
             this.client.logger.debug('TrackException', error);
         }).on('error', console.error);

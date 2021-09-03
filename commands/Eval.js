@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['evaluate'],
     guildOnly: false,
     args: false,
-    usage: '',
+    usage: 'eval [code]',
     owneronly: true,
     execute: async (message, args, client) => {
 

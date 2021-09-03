@@ -2,7 +2,6 @@
 module.exports = {
     name: 'seek',
     description: 'seeks to a specific time',
-    aliases: [''],
     guildOnly: false,
     args: false,
     usage: '[seconds]',
@@ -30,7 +29,7 @@ module.exports = {
 
         try {
             await MusicDispatcher.player.seekTo(duration * 1000);
-            message.channel.send({ embeds: [client.util.embed().setDescription(`Seeked to ${client.util.millisToDuration(durationMs)}.`)], allowedMentions: { repliedUser: false } });
+            message.reply({ embeds: [client.util.embed().setDescription(`Seeked to ${client.util.millisToDuration(durationMs)}.`)], allowedMentions: { repliedUser: false } });
         } catch (err) {
             message.channel.send(`${err.message}`);
         }

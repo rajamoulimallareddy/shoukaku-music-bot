@@ -66,7 +66,7 @@ module.exports = {
             command.execute(message, args, client);
         }
         catch (error) {
-            console.error(error);
+            console.error(error.message);
             message.reply('There was an error trying to execute that command!');
         }
     },

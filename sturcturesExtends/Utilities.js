@@ -18,14 +18,6 @@ module.exports = class Util {
         return prettyMilliseconds(ms, { colonNotation: true, secondsDecimalDigits: 0 });
     }
 
-    static chunk(arr, size) {
-        const temp = [];
-        for (let i = 0; i < arr.length; i += size) {
-            temp.push(arr.slice(i, i + size));
-        }
-        return temp;
-    }
-
     static shuffleArray(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));

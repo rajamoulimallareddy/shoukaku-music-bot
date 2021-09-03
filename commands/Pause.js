@@ -2,7 +2,6 @@
 module.exports = {
     name: 'pause',
     description: 'Pauses the Player.',
-    aliases: [],
     guildOnly: false,
     args: false,
     usage: '',

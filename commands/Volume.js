@@ -18,21 +18,12 @@ module.exports = {
 
         try {
             if (isNaN(newVolume)) {
-                message.reply({
-                    embeds: [client.util.embed()
-                        .setDescription(`Current volume: \`${MusicDispatcher.player.filters.volume * 100}\``)], allowedMentions: { repliedUser: false }
-                });
+                message.reply({ embeds: [client.util.embed().setDescription(`Current volume: \`${MusicDispatcher.player.filters.volume * 100}\``)], allowedMentions: { repliedUser: false } });
             } else {
-                if (newVolume < 0 || newVolume > 500)
-                    return message.reply({
-                        embeds: [client.util.embed()
-                            .setDescription('You can only set the volume from 0-500.')], allowedMentions: { repliedUser: false }
-                    });
+                if (newVolume < 0 || newVolume > 500 || !isNaN(newVolume))
+                    return message.reply({ embeds: [client.util.embed().setDescription('You can only set the volume from 0-500.')], allowedMentions: { repliedUser: false } });
                 await MusicDispatcher.player.setVolume(newVolume / 100);
-                message.reply({
-                    embeds: [client.util.embed()
-                        .setDescription(`The playback volume is now set to: \`${newVolume}\``)], allowedMentions: { repliedUser: false }
-                });
+                message.reply({ embeds: [client.util.embed().setDescription(`The playback volume is now set to: \`${newVolume}\``)], allowedMentions: { repliedUser: false } });
             }
         } catch (error) {
             message.channel.send(`${error.message}`);
