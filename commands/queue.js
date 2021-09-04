@@ -4,7 +4,7 @@ const { MessageButton, } = require('discord.js');
 let chunk = require('chunk');
 module.exports = {
     name: 'queue',
-    description: 'shows total all the tracks in queue',
+    description: 'shows all the tracks in queue',
     aliases: ['q'],
     guildOnly: false,
     args: false,
