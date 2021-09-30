@@ -8,11 +8,7 @@ module.exports = {
     async run(client) {
         console.log(chalk.green(`[CLIENT]   => [READY]               [${client.user.tag}]`));
         if (!client.application?.owner) await client.application?.fetch();
-        const commands = client.slashs.map(command => ({
-            name: command.name,
-            description: command.description,
-            options: command.options,
-        }));
+        const commands = client.slashs.map(command => ({ name: command.name, description: command.description, options: command.options }));
         if (!client.config.guildId) {
             // global command 
             await client.application?.commands.set(commands);
@@ -22,5 +18,5 @@ module.exports = {
             await client.guilds.cache.get(client.config.guildId)?.commands.set(commands);
             client.logger.debug('slash', `Updated ${client.slashs.size} interaction command(s) `);
         }
-    },
+    }
 };

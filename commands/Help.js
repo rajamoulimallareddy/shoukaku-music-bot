@@ -3,7 +3,6 @@
 /* eslint-disable linebreak-style */
 const { colors } = require('../config/config.json');
 const embedColor = colors.default;
-const pSchema = require('../schemas/PrefixSchema.js');
 
 module.exports = {
     name: 'help',
@@ -14,8 +13,8 @@ module.exports = {
     usage: '[command name]',
     execute: async (message, args, client) => {
         const { commands } = message.client;
-        let data = await pSchema.findOne({ ID: message.guild.id });
-        const prefix = data ? data.PREFIX : client.config.prefix;
+
+        const prefix = message.guild.prefix;
         if (!args.length) {
             const cmdHelpEmbed = client.util.embed()
                 .setAuthor('HELP')

@@ -6,24 +6,20 @@ module.exports = {
     description: 'Sets current Play back volume of the player.',
     options: [{
         name: 'input',
-        type: ApplicationCommandOptionType.String,
+        type: ApplicationCommandOptionType.Number,
         description: 'type in volume between 0-500',
         required: true,
     }],
     execute: async ({ interaction, client }) => {
-        const newVolume = interaction.options.getString('input', true);
+        const newVolume = interaction.options.getNumber('input', true);
         if (!interaction.member.voice.channelId)
-            return await interaction.reply({ embeds: [client.util.embed().setDescription('You are not in a voice channel to perform ').setColor('RED')] });
+            return interaction.reply({ embeds: [client.util.embed().setDescription('You are not in a voice channel to perform ').setColor('RED')] });
         const MusicDispatcher = client.queue.get(interaction.guild.id);
         if (!MusicDispatcher || !MusicDispatcher.current)
-            return await interaction.reply({ embeds: [client.util.embed().setDescription('There is Nothing playing in thie guild.').setColor('RED')] });
+            return interaction.reply({ embeds: [client.util.embed().setDescription('There is Nothing playing in thie guild.').setColor('RED')] });
         if (MusicDispatcher.player.connection.channelId !== interaction.member.voice.channelId)
-            return await interaction.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')] });
-
+            return interaction.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')] });
         try {
-            if (newVolume && isNaN(newVolume) || !isNaN(newVolume)) {
-                return interaction.reply({ embeds: [client.util.embed().setDescription('Wrong Usage E.g., volume `input:`<0-500>')] });
-            }
             if (newVolume < 0 || newVolume > 500)
                 return interaction.reply({ embeds: [client.util.embed().setDescription('You can only set the volume from 0-500.')] });
             await MusicDispatcher.player.setVolume(newVolume / 100);

@@ -9,21 +9,27 @@ class MusicDispatcher {
         this.current = null;
         this.previous = null;
         this.end = false;
+        this.repeat = 0;
 
-        this.player.on('start', () => {
-            const embed = this.client.util.embed()
-                .setTitle('Now Playing')
-                .setDescription(`${this.current.info.isStream ? '[StreamingLive]\n' : ''}[${this.current.info.title}](${this.current.info.uri}) [${this.current.info.requester}]`);
-            this.text.send({ embeds: [embed] });
-        }).on('end', () => {
-            this.previous = this.current;
-            this.current = null;
-            this.play();
-        }).on('trackException', error => {
-            this.text.send({ embeds: [this.client.util.embed().setAuthor('Something went wrong with playing the Track').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})`)] });
-            this.client.logger.debug('TrackException', error);
-        }).on('error', console.error);
-
+        this.player
+            .on('start', () => {
+                const embed = this.client.util.embed()
+                    .setTitle('Now Playing')
+                    .setDescription(`${this.current.info.isStream ? '[StreamingLive]\n' : ''}[${this.current.info.title}](${this.current.info.uri}) [${this.current.info.requester}]`);
+                this.text.send({ embeds: [embed] });
+            })
+            .on('end', () => {
+                this.previous = this.current;
+                this.current = null;
+                if (this.repeat === 1) this.queue.unshift(this.previous);
+                else if (this.repeat === 2) this.queue.push(this.previous);
+                this.play();
+            })
+            .on('exception', (exception) => {
+                this.text.send({ embeds: [this.client.util.embed().setAuthor('Something went wrong with playing the Track').setDescription(`track - [${this.current.info.title}](${this.current.info.uri})\nerror - ${exception.error}`)] });
+                this.client.logger.debug('TrackException', exception.error);
+            })
+            .on('error', console.error);
         for (const event of ['closed', 'error']) {
             this.player.on(event, data => {
                 if (data instanceof Error || data instanceof Object) this.client.logger.error(data);
@@ -40,7 +46,6 @@ class MusicDispatcher {
     async play() {
         if (!this.exists || !this.queue.length) return this.destroy();
         this.current = this.queue.shift();
-        this.player.setVolume(0.3);
         this.player.playTrack(this.current.track);
     }
 
@@ -54,11 +59,11 @@ class MusicDispatcher {
         if (this.player.paused) await this.player.setPaused(false);
     }
 
-    async skip(to = 1) {
+    async skip(skipto = 1) {
         if (!this.player) return;
-        if (to > 1) {
-            this.queue.unshift(this.queue[to - 1]);
-            this.queue.splice(to, 1);
+        if (skipto > 1) {
+            this.queue.unshift(this.queue[skipto - 1]);
+            this.queue.splice(skipto, 1);
         }
         await this.player.stopTrack();
     }
@@ -66,11 +71,12 @@ class MusicDispatcher {
     async stop() {
         if (!this.player) return;
         this.queue.length = 0;
+        this.repeat = 0;
         await this.player.stopTrack();
     }
 
     destroy() {
-        this.queue.length = 0;
+        this.stop();
         this.player.connection.disconnect();
         this.client.queue.delete(this.guild.id);
         if (this.end) return;

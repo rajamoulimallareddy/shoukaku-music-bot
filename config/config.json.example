@@ -4,10 +4,8 @@
     "owners": [
         ""
     ],
-    "dev": false,
     "guildId": "",
     "clientId": "",
-    "mongo_uri": "",
     "colors": {
         "default": "606C65",
         "error": "FF4500"

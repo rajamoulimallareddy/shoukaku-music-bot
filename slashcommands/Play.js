@@ -12,10 +12,10 @@ module.exports = {
     }],
     execute: async ({ interaction, client }) => {
         if (!interaction.member.voice.channelId) {
-            return await interaction.reply({ embeds: [client.util.embed().setDescription('you are not in a voice channel to perform  ').setColor('RED')] });
+            return  interaction.reply({ embeds: [client.util.embed().setDescription('you are not in a voice channel to perform  ').setColor('RED')] });
         }
         if (interaction.guild.me.voice.channel && !interaction.guild.me.voice.channel.equals(interaction.member.voice.channel)) {
-            return await interaction.reply({ embeds: [client.util.embed().setDescription('you should be in same voice channel as i am in.').setColor('RED')] });
+            return  interaction.reply({ embeds: [client.util.embed().setDescription('you should be in same voice channel as i am in.').setColor('RED')] });
         }
         try {
             await interaction.deferReply();

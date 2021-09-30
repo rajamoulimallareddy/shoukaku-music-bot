@@ -1,17 +1,16 @@
 /* eslint-disable linebreak-style */
 const fs = require('fs');
-const Discord = require('discord.js');
-const mongoose = require('mongoose');
-const client = new Discord.Client({
+const { Client, Collection } = require('discord.js');
+const client = new Client({
     allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
     intents: ['GUILDS', 'GUILD_VOICE_STATES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'],
     restTimeOffset: 0
 });
-const MusicQueue = require('./Structuers/MusicQueue.js'), ShoukakuHandler = require('./Structuers/ShoukakuHandler.js'), loggerHandler = require('./handler/Shoukakulogger.js');
+const MusicQueue = require('./Structures/MusicQueue.js'), ShoukakuHandler = require('./Structures/ShoukakuHandler.js'), loggerHandler = require('./handler/Shoukakulogger.js');
 
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
-client.slashs = new Discord.Collection();
+client.commands = new Collection();
+client.aliases = new Collection();
+client.slashs = new Collection();
 client.logger = new loggerHandler();
 client.queue = new MusicQueue(client);
 client.shoukaku = new ShoukakuHandler(client);
@@ -33,10 +32,22 @@ fs.readdir('./slashcommands/', (err, files) => {
     InteractionHandler(err, files, client);
 });
 
-mongoose.connect(client.config.mongo_uri).then(() => {
-    client.logger.log('DATABASE', 'Connected to database.');
-}).catch(() => {
-    client.logger.log('MONGODB', 'URI is either not provided or invalid.');
+require('./mongoose.js')();
+
+process.on('unhandledRejection', (reason, p) => {
+    console.log(reason, p);
+});
+
+process.on('uncaughtException', (err, origin) => {
+    console.log(err, origin);
+});
+
+process.on('uncaughtExceptionMonitor', (err, origin) => {
+    console.log(err, origin);
+});
+
+process.on('multipleResolves', (type, promise, reason) => {
+    console.log(type, promise, reason);
 });
 
 client.login(client.config.token);

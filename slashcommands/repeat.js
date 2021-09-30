@@ -1,8 +1,25 @@
 /* eslint-disable linebreak-style */
-const { progress } = require('oxy-progress-bar1');
+const { ApplicationCommandOptionType } = require('discord-api-types/v9');
+const modes = { 1: 'track', 2: 'queue', 0: 'none' };
 module.exports = {
-    name: 'nowplaying',
-    description: 'Shows Currently playing Song',
+    name: 'repeat',
+    description: 'set repeat',
+    options: [{
+        name: 'mode',
+        type: ApplicationCommandOptionType.String,
+        description: 'The New Repeat Mode',
+        choices: [{
+            name: 'track',
+            value: '1'
+        }, {
+            name: 'queue',
+            value: '2'
+        }, {
+            name: 'disbaled',
+            value: '0'
+        }],
+        required: true
+    }],
     execute: async ({ interaction, client }) => {
         if (!interaction.member.voice.channelId)
             return interaction.reply({ embeds: [client.util.embed().setDescription('You are not in a voice channel to perform this.').setColor('RED')] });
@@ -11,14 +28,13 @@ module.exports = {
             return interaction.reply({ embeds: [client.util.embed().setDescription('There is Nothing playing in thie guild.').setColor('RED')] });
         if (MusicDispatcher.player.connection.channelId !== interaction.member.voice.channelId)
             return interaction.reply({ embeds: [client.util.embed().setDescription('You are not in the same voice channel where I am.').setColor('RED')] });
+        if (!MusicDispatcher.current.info.isSeekable)
+            return interaction.reply({ embeds: [client.util.embed().setDescription('Current track isn\'t seekable.')] });
         try {
-            let total = MusicDispatcher.current.info.length;
-            let current = MusicDispatcher.player.position;
-            let slider = '🔵', bar = '▬', size = 20;
-            interaction.reply({
+            MusicDispatcher.repeat = Number(interaction.options.getString('mode'));
+            await interaction.reply({
                 embeds: [client.util.embed()
-                    .setDescription(`[${MusicDispatcher.current.info.title}](${MusicDispatcher.current.info.uri}) [${MusicDispatcher.current.info.requester}]`)
-                    .setFooter(`${progress(bar, current, total, slider, size)[0]} ${require('pretty-ms')(current)}/${require('pretty-ms')(total)}`)]
+                    .setDescription(MusicDispatcher.repeat === 0 ? 'I have disabled the repeat.' : `I have set repeat to ${modes[MusicDispatcher.repeat]}`)]
             });
         } catch (error) {
             interaction.reply(`${error.message}`);

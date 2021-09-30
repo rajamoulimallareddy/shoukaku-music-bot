@@ -11,36 +11,22 @@ module.exports = {
     userPerms: ['MANAGE_GUILD'],
     execute: async (message, args, client) => {
         const newPrefix = args[0];
-        if (!newPrefix) return message.channel.send({
-            embeds: [client.util.embed()
-                .setDescription('Please Provide a Prefix.')], allowedMentions: { repliedUser: false }
-        });
-        if (newPrefix.length > 5) return message.channel.send({
-            embeds: [client.util.embed()
-                .setDescription('This prefix is too long, you have max 5 caracters')], allowedMentions: { repliedUser: false }
-        });
-
-        let data;
-        data = await pSchema.findOne({
-            ID: message.guild.id
-        });
-
-        if (!data) {
-            let newdata = await pSchema.create({
-                ID: message.guild.id,
-                PREFIX: newPrefix
+        pSchema.findOne({ serverId: message.guild.id }, async (error, data) => {
+            if (!newPrefix) return message.channel.send({
+                embeds: [client.util.embed().setDescription('Please Provide a Prefix.')], allowedMentions: { repliedUser: false }
             });
-            newdata.save();
-        } else {
-            await pSchema.findOneAndUpdate({
-                ID: message.guild.id,
-                PREFIX: newPrefix,
+            if (newPrefix.length > 5) return message.channel.send({
+                embeds: [client.util.embed()
+                    .setDescription('This prefix is too long, you have max 5 caracters')], allowedMentions: { repliedUser: false }
             });
-        }
-
-        message.reply({
-            embeds: [client.util.embed()
-                .setDescription(`Set New Prefix To: \`${newPrefix}\``)], allowedMentions: { repliedUser: false }
-        }).catch((err) => { console.log(err.msg); });
+            if (!data) {
+                let newprefix = new pSchema({ serverId: message.guild.id, prefix: newPrefix });
+                newprefix.save();
+            }
+            if (data) {
+                await data.updateOne({ prefix: newPrefix });
+            }
+            message.reply({ embeds: [client.util.embed().setDescription(`Set prefix to: \`${newPrefix}\``)], allowedMentions: { repliedUser: false } }).catch((err) => { console.log(err.msg); });
+        });
     }
 };
