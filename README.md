@@ -58,3 +58,5 @@ Made With Hate by 🖤 A L P H A#1773
 > Shoukaku support Server: https://discord.gg/FVqbtGu
 
 Some parts of the code has been taken from [Kongou](https://github.com/Deivu/Kongou)
+
+> NO SUPPORT WILL BE GIVEN
