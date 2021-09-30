@@ -13,16 +13,13 @@ A music bot which is feature rich and best quality Music.
 ## Config & Bot Startup
 
 Go to config/config.json.example rename it file's name into config.json.
-Do `npm run slash` update slash commands of your bot
 
 ```json
 {
   "prefix": "Your_Prefix",
   "token": "Your Token",
   "owners": ["Your Discord Id for eval & owner only Commands"],
-  "dev": false,
   "guildId": "your guild's id, where you want the slash commands to be updated, when you enabled dev mode, disabling dev mode, means pushes new commands globally",
-  "clientId": "Bots id",
   "colors": {
     "default": "606C65",
     "error": "FF4500"
@@ -48,11 +45,11 @@ To run the Bot just type `npm start`
 
 Creation Date: Tuesday, 20 July 2021.  
 Published Date: Tuesday, 20 July 2021.  
-❱・[Support Server](https://discord.gg/dB6RzCbZhW).  
-❱・Discord Id [ARESᴮᴱ ᴿ⁴ᴬ#1773](https://discord.com/users/688028837711446041)
+❱・[Support Server](https://discord.gg/K9BnjfEwqy).  
+❱・Discord Id [A L P H A#1773](https://discord.com/users/688028837711446041)
 
 Want to contribute just submit a PR.  
-Made With Hate by 🖤 ARESᴮᴱ ᴿ⁴ᴬ#1773
+Made With Hate by 🖤 A L P H A#1773
 
 ## NOTE $ LINKS
 
