@@ -10,8 +10,8 @@
     "chunk": "^0.0.3",
     "common-tags": "^1.8.0",
     "discord-api-types": "^0.23.1",
-    "discord.js": "^13.1.0",
-    "mongoose": "^6.0.8",
+    "discord.js": "^13.2.0",
+    "mongoose": "^6.0.9",
     "oxy-progress-bar1": "^5.1.1",
     "pretty-ms": "^7.0.1",
     "shoukaku": "^2.0.4"

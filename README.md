@@ -24,6 +24,7 @@ Go to config/config.json.example rename it file's name into config.json.
     "default": "606C65",
     "error": "FF4500"
   },
+  "mongoose_uri": " ",
   "nodes": [
     {
       "name": "Your Node name",
