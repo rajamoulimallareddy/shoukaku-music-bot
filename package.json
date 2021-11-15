@@ -14,7 +14,7 @@
     "mongoose": "^6.0.9",
     "oxy-progress-bar1": "^5.1.1",
     "pretty-ms": "^7.0.1",
-    "shoukaku": "^2.0.4"
+    "shoukaku": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0"
