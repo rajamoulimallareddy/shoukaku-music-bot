@@ -16,7 +16,7 @@
             "name": "Your Node name",
             "url": "your host:your port",
             "auth": "youshallnotpass",
-            "secure": fals
+            "secure": false
         }
     ]
 } 
