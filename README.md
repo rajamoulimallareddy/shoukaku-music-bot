@@ -61,3 +61,5 @@ Made With Hate by 🖤 A L P H A#1773
 Some parts of the code has been taken from [Kongou](https://github.com/Deivu/Kongou)
 
 > **NO SUPPORT WILL BE GIVEN**
+
+Top.gg verification 
